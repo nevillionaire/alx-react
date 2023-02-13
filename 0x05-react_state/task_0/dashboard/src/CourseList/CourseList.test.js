@@ -1,13 +1,8 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import CourseList from "./CourseList";
-import { StyleSheetTestUtils } from 'aphrodite';
 
 describe("Testing <CourseList />", () => {
-  beforeEach(() => {
-    StyleSheetTestUtils.suppressStyleInjection();
-  });
-
   it("Renders CourseList component without crashing", () => {
     let wrapper = shallow(<CourseList />);
     expect(wrapper.exists());
@@ -32,7 +27,6 @@ describe("Testing <CourseList listCourses={listCourses}/>", () => {
   let wrapper;
 
   beforeEach(() => {
-    StyleSheetTestUtils.suppressStyleInjection();
     const listCourses = [
       {id: 1, name: 'ES6', credit: 60},
       {id: 2, name: 'Webpack', credit: 20},

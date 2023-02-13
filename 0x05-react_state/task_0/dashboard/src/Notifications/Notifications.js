@@ -1,9 +1,8 @@
 import React from 'react';
 import closeIcon from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
-import PropeTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import NotificationItemShape from './NotificationItemShape';
-import shallowCompare from 'react-addons-shallow-compare';
 import { StyleSheet, css } from 'aphrodite';
 
 class Notifications extends React.Component {
@@ -12,8 +11,9 @@ class Notifications extends React.Component {
     this.markAsRead = this.markAsRead.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
+  shouldComponentUpdate(nextProps) {
+    return nextProps.listNotifications.length > this.props.listNotifications.length ||
+    this.props.displayDrawer != nextProps.displayDrawer;
   }
 
   markAsRead(id) {
@@ -141,15 +141,15 @@ const notificationStyles = StyleSheet.create({
 Notifications.defaultProps = {
   displayDrawer: false,
   listNotifications: [],
-  handleDisplayDrawer: () => {},
   handleHideDrawer: () => {},
+  handleDisplayDrawer: () => {}
 };
 
 Notifications.propTypes = {
-  displayDrawer: PropeTypes.bool,
-  listNotifications: PropeTypes.arrayOf(NotificationItemShape),
-  handleDisplayDrawer: PropeTypes.func,
-  handleHideDrawer: PropeTypes.func,
+  displayDrawer: PropTypes.bool,
+  listNotifications: PropTypes.arrayOf(NotificationItemShape),
+  handleHideDrawer: PropTypes.func,
+  handleDisplayDrawer: PropTypes.func
 };
 
 export default Notifications;

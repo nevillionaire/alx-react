@@ -73,25 +73,25 @@ describe("Testing <App logOut={function} />", () => {
   });
 });
 
-describe("Testing App Component's State", () => {
+describe("Testing App Component's State />", () => {
   let wrapper;
 
   beforeEach(() => {
     StyleSheetTestUtils.suppressStyleInjection();
-    wrapper = shallow(<App />);
+    wrapper = shallow(<App/>);
   });
 
-  it("Verify that the default state for displayDrawer is false", () => {
+  it('check if default value of displayDrawer in state is false', () => {
     expect(wrapper.state('displayDrawer')).toBe(false);
   });
 
-  it("Verify that after calling handleDisplayDrawer, the state should now be true", () => {
+  it('Verify that after calling handleDisplayDrawer, the state displayDrawer should now be true', () => {
     wrapper.instance().handleDisplayDrawer();
     expect(wrapper.state('displayDrawer')).toBe(true);
   });
 
-  it("Verify that after calling handleHideDrawer, the state is updated to be false", () => {
+  it('verify that after calling handleHideDrawer, the state displayDrawer is updated to be false', () => {
     wrapper.instance().handleHideDrawer();
     expect(wrapper.state('displayDrawer')).toBe(false);
-  });  
+  });
 });
