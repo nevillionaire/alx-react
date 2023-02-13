@@ -29,6 +29,24 @@ class App extends React.Component {
       {id: 2, value: "New resume available", type: "urgent"},
       {id: 3, html: {__html: getLatestNotification()}, type: "urgent"},
     ];
+    this.state = {
+      displayDrawer: false
+    };
+
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+  }
+
+  handleDisplayDrawer() {
+    this.setState({
+      displayDrawer: true
+    });
+  }
+
+  handleHideDrawer() {
+    this.setState({
+      displayDrawer: false
+    });
   }
 
   handleKeyDown(e) {
@@ -50,8 +68,13 @@ class App extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <Notification listNotifications={this.listNotifications}/>
-        <div className={css(body.App)}>
+        <Notification
+          listNotifications={this.listNotifications}
+          displayDrawer={this.state.displayDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
+        />
+        <div className={css(bodyStyles.App)}>
           <Header />
           {this.props.isLoggedIn ?
             <BodySectionWithMarginBottom title="Course list"><CourseList listCourses={this.listCourses}/></BodySectionWithMarginBottom>
@@ -61,32 +84,32 @@ class App extends React.Component {
           <BodySection title="News from the School">
             <p>Random Text</p>
           </BodySection>
-        <div className={css(footer.footer)}>
-          <Footer />
-        </div>
+          <div className={css(footerStyles.footer)}>
+            <Footer />
+          </div>
         </div>
       </React.Fragment>
     );
   }
 }
 
-const body = StyleSheet.create({
+const bodyStyles = StyleSheet.create({
   App: {
     position: 'relative',
     minHeight: '100vh'
   }
 });
 
-const footer = StyleSheet.create({
-  footer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderTop: '3px solid #E11D3F',
-    padding: '1rem',
-    fontStyle: 'italic'
-  }
+const footerStyles = StyleSheet.create({
+	footer: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderTop: '3px solid #E11D3F',
+		padding: '1rem',
+		fontStyle: 'italic',
+	}
 });
 
 App.defaultProps = {

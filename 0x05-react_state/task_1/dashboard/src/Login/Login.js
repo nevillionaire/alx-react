@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 function Login() {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [enableSubmit, setenableSubmit] = useState(false)
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [enableSubmit, setEnableSubmit] = useState(false);
   const handleLoginSubmit = (e) => {
-    e.preventDefault()
-    setIsLoggedIn(true)
-  }
-
+    e.preventDefault();
+    setIsLoggedIn(true);
+  };
   const handleChangeEmail = (e) => {
-    setEmail(e.target.value)
-  }
-
+    setEmail(e.target.value);
+  };
   const handleChangePassword = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   useEffect(() => {
     if (email != '' && password != '') {
@@ -33,33 +29,33 @@ function Login() {
 
   return (
     <React.Fragment>
-      <div className={css(body.App)}>
+      <div className={css(loginStyles.appBody)}>
         <p>Login to access the full dashboard</p>
-        <form onSubmit={handleLoginSubmit}>
+        <form onSubmit={handleLoginSubmit} >
           <label htmlFor="email">Email: </label>
-          <input type="email"
-            id="email" name="email"
-            className={css(body.input)}
-            value={email} onChange={handleChangeEmail} />
+          <input type="email" id="email" name="email" className={loginStyles.inputs} value={email} onChange={handleChangeEmail} />
           <label htmlFor="password">Password: </label>
-          <input type="password"
-            id="password" name="password"
-            className={css(body.input)}
-            value={password} onChange={handleChangePassword} />
-          <input type="submit" value="Ok" disabled={!enableSubmit} />
+          <input type="password" id="password" name="password" className={loginStyles.inputs} value={password} onChange={handleChangePassword} />
+          <input type="submit" value="Ok" disabled={!enableSubmit}/>
         </form>
       </div>
     </React.Fragment>
   )
 }
 
-const body = StyleSheet.create({
-  App: {
-    padding: '36px 24px'
-  },
-  input: {
-    margin: '0 16px 0 8px'
-  }
-});
+const loginStyles = StyleSheet.create({
+	appBody: {
+    padding: '36px 24px',
+		'@media (max-width: 900px)': {
+      display: 'flex',
+      flexDirection: 'column'
+    }
+	},
+
+	inputs: {
+		margin: '0 16px 0 8px'
+	}
+})
+
 
 export default Login;

@@ -32,6 +32,7 @@ describe("Testing <CourseList listCourses={listCourses}/>", () => {
   let wrapper;
 
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     const listCourses = [
       {id: 1, name: 'ES6', credit: 60},
       {id: 2, name: 'Webpack', credit: 20},
