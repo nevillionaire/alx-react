@@ -2,35 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
-const row = {
-  backgroundColor: '#f5f5f5ab'
-}
-const header = {
-  backgroundColor: '#deb5b545'
-}
 function CourseListRow({ isHeader, textFirstCell, textSecondCell }) {
-  const headerOrRow = isHeader ? header : row;
+  const headerStyle = {backgroundColor: '#deb5b545'};
+  const rowStyle = {backgroundColor: '#f5f5f5ab'};
+  const selected_style = isHeader ? headerStyle : rowStyle;
+
   return (
-    <tr style={headerOrRow}>
+    <tr style={selected_style}>
       {isHeader ?
         textSecondCell === null ?
-          <th colSpan="2" className={css(rows.thcenter)}>{textFirstCell}</th>
+          <th colSpan="2" className={css(rowsStyles.thcenter)}>{textFirstCell}</th>
         :
           <>
-            <th className={css(rows.th)}>{textFirstCell}</th>
-            <th className={css(rows.th)}>{textSecondCell}</th>
+            <th className={css(rowsStyles.th)}>{textFirstCell}</th>
+            <th className={css(rowsStyles.th)}>{textSecondCell}</th>
           </>
       :
         <>
-          <td className={css(rows.td)}>{textFirstCell}</td>
-          <td className={css(rows.td)}>{textSecondCell}</td>
+          <td className={css(rowsStyles.td)}>{textFirstCell}</td>
+          <td className={css(rowsStyles.td)}>{textSecondCell}</td>
         </>
       }
     </tr>
   );
 }
 
-const rows= StyleSheet.create({
+const rowsStyles = StyleSheet.create({
   thcenter: {
     borderBottom: '1px solid gray',
     margin: 0,
